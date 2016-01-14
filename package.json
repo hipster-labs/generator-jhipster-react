@@ -9,17 +9,30 @@
     "url": "http://deepu105.github.io"
   },
   "files": [
-    "generators/app"
+    "generators/app",
+    "generators/entity"
   ],
   "main": "generators/app/index.js",
   "keywords": [
-    "yeoman-generator", "jhipster-module" , "Jhipster-react"
+    "yeoman-generator",
+    "jhipster-module" ,
+    "Jhipster-react",
+    "Java",
+    "Spring",
+    "Spring Security",
+    "JPA",
+    "Hibernate",
+    "ReactJS",
+    "Twitter Bootstrap"
   ],
   "dependencies": {
-    "yeoman-generator": "^0.21.1",
-    "chalk": "^1.0.0",
-    "yosay": "^1.0.2",
-    "generator-jhipster": ">=2.26.2"
+    "yeoman-generator": "0.22.2",
+    "chalk": "1.1.1",
+    "generator-jhipster": ">=2.26.2",
+    "lodash": "3.10.1",
+    "mkdirp": "0.5.1",
+    "shelljs": "0.5.3",
+    "underscore.string": "3.2.2"
   },
   "devDependencies": {
     "gulp": "^3.6.0",
@@ -37,8 +50,12 @@
     "yeoman-assert": "^2.0.0"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/deepu105/generator-jhipster-react.git"
+      "type": "git",
+      "url": "git+https://github.com/deepu105/generator-jhipster-react.git"
+    },
+  "engines": {
+    "node": ">=0.12.0",
+    "npm": ">=1.4.0"
   },
   "license": "Apache-2.0",
   "bugs": {
