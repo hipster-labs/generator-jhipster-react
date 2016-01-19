@@ -2,7 +2,7 @@
   "name": "generator-jhipster-react",
   "version": "0.0.0",
   "description": "A Jhipster based generator to create react + spring boot application",
-  "homepage": "https://github.com/deepu105/generator-jhipster-react",
+  "homepage": "https://github.com/hipster-labs/generator-jhipster-react",
   "author": {
     "name": "Deepu KS",
     "email": "d4udts@gmail.com",
