@@ -13,7 +13,7 @@ var jhipsterVar = {moduleName: 'react'};
 var jhipsterFunc = {};
 
 const DEF_CLIENT_BUILD = 'gulp';
-const WEB_SRC = 'src/main/client/';
+const WEB_SRC = 'src/main/webapp/';
 module.exports = generators.Base.extend({
   initializing: {
 

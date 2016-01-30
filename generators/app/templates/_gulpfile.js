@@ -7,8 +7,8 @@ var source       = require('vinyl-source-stream');
 var babelify     = require('babelify');
 var browserSync  = require('browser-sync');
 
-var src = './src/main/client',
-dest = src + '/dist',
+var src = './src/main/webapp',
+dest = src + '/static',
 mui = './node_modules/material-ui/src';
 
 var config = {
@@ -33,7 +33,7 @@ var config = {
     // bundle config in the list below
     bundleConfigs: [{
       entries: src + '/app/app.jsx',
-      dest: dest,
+      dest: dest + '/js',
       outputName: 'app.js'
     }],
     extensions: ['.jsx'],
@@ -41,8 +41,13 @@ var config = {
 };
 
 gulp.task('markup', function() {
-  return gulp.src(config.markup.src)
-    .pipe(gulp.dest(config.markup.dest));
+  return gulp.src(src + "/index.html")
+    .pipe(gulp.dest(src));
+});
+
+gulp.task('css', function() {
+  return gulp.src(src + '/content/**')
+    .pipe(gulp.dest(dest + '/css'));
 });
 
 gulp.task('setWatch', function() {
@@ -53,7 +58,7 @@ gulp.task('watch', ['setWatch', 'browserSync'], function() {
   gulp.watch(config.markup.src, ['markup']);
 });
 
-gulp.task('build', ['browserify', 'markup']);
+gulp.task('build', ['browserify', 'markup', 'css']);
 
 gulp.task('default', ['watch']);
 
