@@ -91,6 +91,7 @@ module.exports = generators.Base.extend({
         options: {
           'skip-client': true,
           'skip-install': true,
+          'skip-bower': true,
           'client-build': DEF_CLIENT_BUILD,
           'i18n': this.enableTranslation
         }
@@ -133,7 +134,7 @@ module.exports = generators.Base.extend({
       this.copy(WEB_SRC + 'favicon.ico',WEB_SRC + 'favicon.ico');
       this.copy(WEB_SRC + 'htaccess.txt',WEB_SRC + '.htaccess');
       this.copy(WEB_SRC + 'robots.txt',WEB_SRC + 'robots.txt');
-      this.copy(WEB_SRC + 'content/_main.css',WEB_SRC + 'content/main.css');
+      this.copy(WEB_SRC + 'content/css/_main.css',WEB_SRC + 'content/css/main.css');
     },
 
     writeAppFiles : function () {

@@ -6,9 +6,11 @@ var handleErrors = require('./gulp-util/handleErrors');
 var source       = require('vinyl-source-stream');
 var babelify     = require('babelify');
 var browserSync  = require('browser-sync');
+var sequence     = require('gulp-sequence');
 
 var src = './src/main/webapp',
-dest = src + '/static',
+dest = src + '/content',
+dist = src + '/dist'
 mui = './node_modules/material-ui/src';
 
 var config = {
@@ -23,8 +25,7 @@ var config = {
     ]
   },
   markup: {
-    src: [src + "/index.html", src + '/content/**'],
-    dest: dest
+    src: [src + "/index.html"]
   },
   browserify: {
     // Enable source maps
@@ -41,13 +42,13 @@ var config = {
 };
 
 gulp.task('markup', function() {
-  return gulp.src(src + "/index.html")
-    .pipe(gulp.dest(src));
+  return gulp.src(config.markup.src)
+    .pipe(gulp.dest(dist));
 });
 
-gulp.task('css', function() {
+gulp.task('content', function() {
   return gulp.src(src + '/content/**')
-    .pipe(gulp.dest(dest + '/css'));
+    .pipe(gulp.dest(dist + '/content'));
 });
 
 gulp.task('setWatch', function() {
@@ -58,7 +59,7 @@ gulp.task('watch', ['setWatch', 'browserSync'], function() {
   gulp.watch(config.markup.src, ['markup']);
 });
 
-gulp.task('build', ['browserify', 'markup', 'css']);
+gulp.task('build', sequence('browserify', 'markup', 'content'));
 
 gulp.task('default', ['watch']);
 
