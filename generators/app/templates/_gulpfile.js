@@ -1,8 +1,8 @@
 var browserify   = require('browserify');
 var watchify     = require('watchify');
-var bundleLogger = require('gulp-util/bundleLogger');
+var bundleLogger = require('./gulp-util/bundleLogger');
 var gulp         = require('gulp');
-var handleErrors = require('gulp-util/handleErrors');
+var handleErrors = require('./gulp-util/handleErrors');
 var source       = require('vinyl-source-stream');
 var babelify     = require('babelify');
 var browserSync  = require('browser-sync');
@@ -23,7 +23,7 @@ var config = {
     ]
   },
   markup: {
-    src: src + "/index.html",
+    src: [src + "/index.html", src + '/content/**'],
     dest: dest
   },
   browserify: {

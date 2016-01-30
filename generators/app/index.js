@@ -34,6 +34,7 @@ module.exports = generators.Base.extend({
 
     setupClientVars : function () {
       this.useSass = this.config.get('useSass');
+      this.appName = this.config.get('appName');
       this.frontendBuilder = this.config.get('frontendBuilder');
       this.enableTranslation = this.config.get('enableTranslation');
       if(this.useSass !=null && this.frontendBuilder != null && this.enableTranslation != null) {
@@ -148,7 +149,7 @@ module.exports = generators.Base.extend({
       this.log(chalk.green.bold('\nRun command `npm install` on the project root to install required dependencies\n'));
     } else {
       this.log(chalk.green.bold('\nRunning NPM install. If this fails run command `npm install` on the project root\n'));
+      this.npmInstall();
     }
-    this.npmInstall();
   }
 });
