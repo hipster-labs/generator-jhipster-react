@@ -17,13 +17,17 @@
     "yeoman-generator",
     "jhipster-module" ,
     "Jhipster-react",
+    "JHipster",
     "Java",
     "Spring",
     "Spring Security",
     "JPA",
     "Hibernate",
     "ReactJS",
-    "Twitter Bootstrap"
+    "Material UI",
+    "Material",
+    "Paper",
+    "React"
   ],
   "dependencies": {
     "yeoman-generator": "0.22.2",
