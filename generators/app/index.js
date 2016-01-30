@@ -12,7 +12,7 @@ var jhipsterVar = {moduleName: 'react'};
 var jhipsterFunc = {};
 
 const DEF_CLIENT_BUILD = 'gulp';
-
+const WEB_SRC = 'src/main/client/';
 module.exports = generators.Base.extend({
   initializing: {
 
@@ -104,12 +104,35 @@ module.exports = generators.Base.extend({
     }
   },
 
-  writing: function () {
+  writing: {
     /* write client side files */
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    writeCommonFiles : function () {
+      this.fs.copy(this.templatePath('_package.json'),this.destinationPath('package.json'));
+      this.fs.copy(this.templatePath('.babelrc'),this.destinationPath('.babelrc'));
+      this.fs.copy(this.templatePath('.gitignore'),this.destinationPath('.gitignore'));
+    },
+
+    writeGulpFiles : function () {
+      this.fs.copy(this.templatePath('_gulpfile.js'),this.destinationPath('gulpfile.js'));
+      this.fs.copy(this.templatePath('gulp-util/bundleLogger.js'),this.destinationPath('gulp-util/bundleLogger.js'));
+      this.fs.copy(this.templatePath('gulp-util/handleErrors.js'),this.destinationPath('gulp-util/handleErrors.js'));
+    },
+
+    writeMainFiles : function () {
+      this.fs.copy(this.templatePath(WEB_SRC + '_index.html'),this.destinationPath(WEB_SRC + 'index.html'));
+      this.fs.copy(this.templatePath(WEB_SRC + '404.html'),this.destinationPath(WEB_SRC + '404.html'));
+      this.fs.copy(this.templatePath(WEB_SRC + 'favicon.ico'),this.destinationPath(WEB_SRC + 'favicon.ico'));
+      this.fs.copy(this.templatePath(WEB_SRC + 'htaccess.txt'),this.destinationPath(WEB_SRC + '.htaccess'));
+      this.fs.copy(this.templatePath(WEB_SRC + 'robots.txt'),this.destinationPath(WEB_SRC + 'robots.txt'));
+      this.fs.copy(this.templatePath(WEB_SRC + 'content/_main.css'),this.destinationPath(WEB_SRC + 'content/main.css'));
+    },
+
+    writeAppFiles : function () {
+      this.fs.copy(this.templatePath(WEB_SRC + 'app/_app.jsx'),this.destinationPath(WEB_SRC + 'app/app.jsx'));
+      this.fs.copy(this.templatePath(WEB_SRC + 'app/_Main.jsx'),this.destinationPath(WEB_SRC + 'app/Main.jsx'));
+    }
+
+
   },
 
   install: function () {
