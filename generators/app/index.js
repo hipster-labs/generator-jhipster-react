@@ -2,6 +2,7 @@
 var generators = require('yeoman-generator');
 var jhipster = require('generator-jhipster');
 var packagejs = require(__dirname + '/../../package.json');
+var _ = require('underscore.string');
 var chalk = require('chalk');
 var path = require('path');
 
@@ -88,6 +89,7 @@ module.exports = generators.Base.extend({
       this.composeWith('jhipster:app', {
         options: {
           'skip-client': true,
+          'skip-install': true,
           'client-build': DEF_CLIENT_BUILD,
           'i18n': this.enableTranslation
         }
@@ -101,41 +103,52 @@ module.exports = generators.Base.extend({
       this.config.set('useSass', this.useSass);
       this.config.set('frontendBuilder', DEF_CLIENT_BUILD);
       this.config.set('enableTranslation', this.enableTranslation);
+    },
+
+    setupVars: function () {
+      this.baseName = this.appName;
+      this.slugifiedBaseName = _.slugify(this.baseName);
     }
   },
 
   writing: {
     /* write client side files */
     writeCommonFiles : function () {
-      this.fs.copy(this.templatePath('_package.json'),this.destinationPath('package.json'));
-      this.fs.copy(this.templatePath('.babelrc'),this.destinationPath('.babelrc'));
-      this.fs.copy(this.templatePath('.gitignore'),this.destinationPath('.gitignore'));
+      console.log(this.slugifiedBaseName)
+      this.template('_package.json','package.json');
+      this.copy('.babelrc','.babelrc');
+      this.copy('.gitignore','.gitignore');
     },
 
     writeGulpFiles : function () {
-      this.fs.copy(this.templatePath('_gulpfile.js'),this.destinationPath('gulpfile.js'));
-      this.fs.copy(this.templatePath('gulp-util/bundleLogger.js'),this.destinationPath('gulp-util/bundleLogger.js'));
-      this.fs.copy(this.templatePath('gulp-util/handleErrors.js'),this.destinationPath('gulp-util/handleErrors.js'));
+      this.copy('_gulpfile.js','gulpfile.js');
+      this.copy('gulp-util/bundleLogger.js','gulp-util/bundleLogger.js');
+      this.fs.copy('gulp-util/handleErrors.js','gulp-util/handleErrors.js');
     },
 
     writeMainFiles : function () {
-      this.fs.copy(this.templatePath(WEB_SRC + '_index.html'),this.destinationPath(WEB_SRC + 'index.html'));
-      this.fs.copy(this.templatePath(WEB_SRC + '404.html'),this.destinationPath(WEB_SRC + '404.html'));
-      this.fs.copy(this.templatePath(WEB_SRC + 'favicon.ico'),this.destinationPath(WEB_SRC + 'favicon.ico'));
-      this.fs.copy(this.templatePath(WEB_SRC + 'htaccess.txt'),this.destinationPath(WEB_SRC + '.htaccess'));
-      this.fs.copy(this.templatePath(WEB_SRC + 'robots.txt'),this.destinationPath(WEB_SRC + 'robots.txt'));
-      this.fs.copy(this.templatePath(WEB_SRC + 'content/_main.css'),this.destinationPath(WEB_SRC + 'content/main.css'));
+      this.template(WEB_SRC + '_index.html',WEB_SRC + 'index.html');
+      this.copy(WEB_SRC + '404.html',WEB_SRC + '404.html');
+      this.copy(WEB_SRC + 'favicon.ico',WEB_SRC + 'favicon.ico');
+      this.copy(WEB_SRC + 'htaccess.txt',WEB_SRC + '.htaccess');
+      this.copy(WEB_SRC + 'robots.txt',WEB_SRC + 'robots.txt');
+      this.copy(WEB_SRC + 'content/_main.css',WEB_SRC + 'content/main.css');
     },
 
     writeAppFiles : function () {
-      this.fs.copy(this.templatePath(WEB_SRC + 'app/_app.jsx'),this.destinationPath(WEB_SRC + 'app/app.jsx'));
-      this.fs.copy(this.templatePath(WEB_SRC + 'app/_Main.jsx'),this.destinationPath(WEB_SRC + 'app/Main.jsx'));
+      this.copy(WEB_SRC + 'app/_app.jsx',WEB_SRC + 'app/app.jsx');
+      this.template(WEB_SRC + 'app/_Main.jsx',WEB_SRC + 'app/Main.jsx');
     }
 
 
   },
 
   install: function () {
-    this.installDependencies();
+    if(this.options['skip-install']){
+      this.log(chalk.green.bold('\nRun command `npm install` on the project root to install required dependencies\n'));
+    } else {
+      this.log(chalk.green.bold('\nRunning NPM install. If this fails run command `npm install` on the project root\n'));
+    }
+    this.npmInstall();
   }
 });
