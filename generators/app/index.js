@@ -1,4 +1,5 @@
 'use strict';
+
 var generators = require('yeoman-generator');
 var jhipster = require('generator-jhipster');
 var packagejs = require(__dirname + '/../../package.json');
@@ -125,7 +126,9 @@ module.exports = generators.Base.extend({
     writeGulpFiles : function () {
       this.copy('_gulpfile.js','gulpfile.js');
       this.copy('gulp-util/bundleLogger.js','gulp-util/bundleLogger.js');
-      this.fs.copy('gulp-util/handleErrors.js','gulp-util/handleErrors.js');
+      this.fs.copy(
+        this.templatePath('gulp-util/handleErrors.js'),
+        this.destinationPath('gulp-util/handleErrors.js'));
     },
 
     writeMainFiles : function () {
