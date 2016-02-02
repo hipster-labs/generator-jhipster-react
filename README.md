@@ -29,5 +29,5 @@ Apache-2.0 © [Deepu KS](http://deepu105.github.io)
 [npm-url]: https://npmjs.org/package/generator-jhipster-react
 [travis-image]: https://travis-ci.org/deepu105/generator-jhipster-react.svg?branch=master
 [travis-url]: https://travis-ci.org/deepu105/generator-jhipster-react
-[daviddm-image]: https://david-dm.org/deepu105/generator-jhipster-react.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/deepu105/generator-jhipster-react
+[daviddm-image]: https://david-dm.org/hipster-labs/generator-jhipster-react.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/hipster-labs/generator-jhipster-react
