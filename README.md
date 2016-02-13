@@ -3,6 +3,8 @@
 
 ## Installation
 
+**Attention: This is still a work in progress**
+
 First, install [Yeoman](http://yeoman.io) and [JHipster](http://jhipster.github.io/), then install generator-jhipster-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
