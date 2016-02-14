@@ -129,14 +129,6 @@ module.exports = generators.Base.extend({
       this.copy('_webpack-production.config.js', 'webpack-production.config.js');
     },
 
-    writeGulpFiles : function () {
-      this.copy('_gulpfile.js','gulpfile.js');
-      this.copy('gulp-util/bundleLogger.js','gulp-util/bundleLogger.js');
-      this.fs.copy(
-        this.templatePath('gulp-util/handleErrors.js'),
-        this.destinationPath('gulp-util/handleErrors.js'));
-    },
-
     writeMainFiles : function () {
       this.template(WEB_SRC + '_index.html',WEB_SRC + 'index.html');
       this.copy(WEB_SRC + '404.html',WEB_SRC + '404.html');
