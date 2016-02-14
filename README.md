@@ -1,7 +1,7 @@
 # generator-jhipster-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A Jhipster based generator to create awesome react + spring boot applications
 
-![jhipster-react logo](//raw.githubusercontent.com/hipster-labs/generator-jhipster-react/master/logo-jhipster-react.svg)
+![jhipster-react logo](logo-jhipster-react.svg)
 ## Installation
 
 **Attention: This is still a work in progress**
