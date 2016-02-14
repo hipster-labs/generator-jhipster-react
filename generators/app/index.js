@@ -15,6 +15,7 @@ var jhipsterFunc = {};
 
 const DEF_CLIENT_BUILD = 'gulp';
 const WEB_SRC = 'src/main/webapp/';
+
 module.exports = generators.Base.extend({
   initializing: {
 
@@ -121,6 +122,11 @@ module.exports = generators.Base.extend({
       this.template('_package.json','package.json');
       this.copy('.babelrc','.babelrc');
       this.copy('.gitignore','.gitignore');
+      this.copy('.eslintrc', '.eslintrc');
+    },
+
+    writeWebpackFiles : function() {
+      this.copy('_webpack-production.config.js', 'webpack-production.config.js');
     },
 
     writeGulpFiles : function () {
@@ -144,8 +150,6 @@ module.exports = generators.Base.extend({
       this.copy(WEB_SRC + 'app/_app.jsx',WEB_SRC + 'app/app.jsx');
       this.template(WEB_SRC + 'app/_Main.jsx',WEB_SRC + 'app/Main.jsx');
     }
-
-
   },
 
   install: function () {
