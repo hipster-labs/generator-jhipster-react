@@ -127,6 +127,8 @@ module.exports = generators.Base.extend({
 
     writeWebpackFiles : function() {
       this.copy('_webpack-production.config.js', 'webpack-production.config.js');
+      this.copy('_webpack-dev-server.config.js', 'webpack-dev-server.config.js');
+      this.copy('_server.js', 'server.js')
     },
 
     writeMainFiles : function () {
