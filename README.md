@@ -23,11 +23,22 @@ As this is a generator which runs on top of [JHipster](http://jhipster.github.io
 
 This generator requires Jhipster version 2.27 or greater in order to work
 
+## Development-mode
+
+Frontend is working through [webpack-dev-server](webpack-dev-server-url) proxy mode feature in order to have an ability to use both frontend & backend server simultaneously. All requests from frontend would be proxied to backend server.
+
+To start frontend server please run the following command:
+
+```bash
+npm start
+```
+
 ## License
 
 Apache-2.0 © [Deepu KS](http://deepu105.github.io)
 
 
+[webpack-dev-server-url]: https://webpack.github.io/docs/webpack-dev-server.html
 [npm-image]: https://badge.fury.io/js/generator-jhipster-react.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-react
 [travis-image]: https://travis-ci.org/deepu105/generator-jhipster-react.svg?branch=master
