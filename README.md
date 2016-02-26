@@ -1,7 +1,8 @@
 # generator-jhipster-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A Jhipster based generator to create awesome react + spring boot applications
 
-![jhipster-react logo](logo-jhipster-react.svg)
+<img src="https://raw.githubusercontent.com/hipster-labs/generator-jhipster-react/master/logo-jhipster-react.png" height="200px" alt="jhipster-react logo" />
+
 ## Installation
 
 **Attention: This is still a work in progress**
@@ -23,6 +24,16 @@ As this is a generator which runs on top of [JHipster](http://jhipster.github.io
 
 This generator requires Jhipster version 2.27 or greater in order to work
 
+## Development-mode
+
+Frontend is working through [webpack-dev-server](webpack-dev-server-url) proxy mode feature in order to have an ability to use both frontend & backend server simultaneously. All requests from frontend would be proxied to backend server.
+
+To start frontend server please run the following command:
+
+```bash
+npm start
+```
+
 ## Contributing
 
 Contributions are welcome.
@@ -33,6 +44,7 @@ we follow the same contribution guidelines as JHipster, [check it out here](http
 Apache-2.0 © [Deepu KS](http://deepu105.github.io)
 
 
+[webpack-dev-server-url]: https://webpack.github.io/docs/webpack-dev-server.html
 [npm-image]: https://badge.fury.io/js/generator-jhipster-react.svg
 [npm-url]: https://npmjs.org/package/generator-jhipster-react
 [travis-image]: https://travis-ci.org/deepu105/generator-jhipster-react.svg?branch=master
