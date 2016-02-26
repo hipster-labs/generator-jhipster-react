@@ -23,6 +23,11 @@ As this is a generator which runs on top of [JHipster](http://jhipster.github.io
 
 This generator requires Jhipster version 2.27 or greater in order to work
 
+## Contributing
+
+Contributions are welcome.
+we follow the same contribution guidelines as JHipster, [check it out here](https://github.com/jhipster/generator-jhipster/blob/master/CONTRIBUTING.md)
+
 ## License
 
 Apache-2.0 © [Deepu KS](http://deepu105.github.io)
