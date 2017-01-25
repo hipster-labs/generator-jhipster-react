@@ -1,11 +1,11 @@
 'use strict';
 
 var generators = require('yeoman-generator');
-var jhipster = require('generator-jhipster');
 var packagejs = require(__dirname + '/../../package.json');
 var _ = require('underscore.string');
 var chalk = require('chalk');
 var path = require('path');
+var shelljs = require('shelljs');
 
 // Stores JHipster variables
 var jhipsterVar = {moduleName: 'react'};
@@ -15,6 +15,8 @@ var jhipsterFunc = {};
 
 const DEF_CLIENT_BUILD = 'gulp';
 const WEB_SRC = 'src/main/webapp/';
+
+shelljs.echo('{ "generator-jhipster": { "baseName" : ""}}').to('.yo-rc.json');
 
 module.exports = generators.Base.extend({
   initializing: {
