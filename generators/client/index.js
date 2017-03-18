@@ -123,6 +123,7 @@ module.exports = JhipsterClientGenerator.extend({
     this.clientPackageManager = this.configOptions.clientPackageManager;
     this.isDebugEnabled = this.configOptions.isDebugEnabled || this.options.debug;
 
+    // TODO chnage to process JSX
     this.processJsx = (source, dest, generator, opt, template) => {
       this.copyTemplate(source, dest, 'stripJs', generator, opt, template);
     };
@@ -145,11 +146,7 @@ module.exports = JhipsterClientGenerator.extend({
       if (!this.applicationType) {
         this.applicationType = 'monolith';
       }
-      this.clientFramework = this.config.get('clientFramework');
-      if (!this.clientFramework) {
-        /* for backward compatibility */
-        this.clientFramework = 'angular2';
-      }
+      this.clientFramework = this.config.get('clientFramework') || 'react';
       this.useSass = this.config.get('useSass');
       this.enableTranslation = this.config.get('enableTranslation'); // this is enabled by default to avoid conflicts for existing applications
       this.nativeLanguage = this.config.get('nativeLanguage');
@@ -195,7 +192,7 @@ module.exports = JhipsterClientGenerator.extend({
     setSharedConfigOptions() {
       this.configOptions.lastQuestion = this.currentQuestion;
       this.configOptions.totalQuestions = this.totalQuestions;
-      this.configOptions.clientFramework = 'angular2'; // Hack to get server side to generate stuff accordingly
+      this.configOptions.clientFramework = 'angular2'; // Hack to get server side to generate webpack stuff accordingly
       this.configOptions.useSass = this.useSass;
     }
 
@@ -246,9 +243,6 @@ module.exports = JhipsterClientGenerator.extend({
       }
       if (this.configOptions.websocket !== undefined) {
         this.websocket = this.configOptions.websocket;
-      }
-      if (this.configOptions.clientFramework) {
-        this.clientFramework = this.configOptions.clientFramework;
       }
       if (this.configOptions.databaseType) {
         this.databaseType = this.configOptions.databaseType;

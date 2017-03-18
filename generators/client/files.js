@@ -117,6 +117,13 @@ const files = {
         { file: 'modules/login/Login.js', method: 'processJsx' },
         { file: 'modules/login/LoginModal.js', method: 'processJsx' }
       ]
+    },
+    {
+      condition: generator => generator.useSass,
+      path: REACT_DIR,
+      templates: [
+        'modules/home/home.scss',
+      ]
     }
   ],
   reducers: [
