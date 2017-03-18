@@ -75,10 +75,17 @@
   "scripts": {
     "lint": "eslint src webpack",
     "lint:fix": "eslint src webpack --fix",
-    "start": "yarn watch",
-    "watch": "cross-env NODE_ENV=dev-watch webpack-dev-server --config webpack/webpack.dev.js  --progress --inline --hot --profile --port=8000 --open",
-    "build": "webpack --config webpack/webpack.dev.js",
-    "bundle": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
-    "test": "cross-env NODE_ENV=test mocha"
+    "start": "<%= clientPackageManager %> run webpack:dev",
+    "webpack:dev": "cross-env NODE_ENV=dev-watch webpack-dev-server --config webpack/webpack.dev.js  --progress --inline --hot --profile --port=8000 --open",
+    "webpack:build": "<%= clientPackageManager %> run webpack:build:dev",
+    "webpack:build:dev": "webpack --config webpack/webpack.dev.js",
+    "webpack:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js",
+    "test": "cross-env NODE_ENV=test mocha",
+    <%_ if (protractorTests) { _%>
+    "e2e": "protractor <%= TEST_SRC_DIR %>protractor.conf.js",
+    "postinstall": "webdriver-manager update && <%= clientPackageManager %> run webpack:build"
+    <%_ } else { _%>
+    "postinstall": "<%= clientPackageManager %> run webpack:build"
+    <%_ } _%>
   }
 }
