@@ -1,155 +1,287 @@
+const util = require('util');
 const generator = require('yeoman-generator');
-const _ = require('underscore.string');
 const chalk = require('chalk');
-const path = require('path');
-const shelljs = require('shelljs');
+const BaseGenerator = require('generator-jhipster/generators/generator-base');
+const cleanup = require('generator-jhipster/generators/cleanup');
+const prompts = require('./prompts');
 const packagejs = require('../../package.json');
+const constants = require('generator-jhipster/generators/generator-constants');
 
-// Stores JHipster variables
-const jhipsterVar = { moduleName: 'react' };
+const JhipsterGenerator = generator.extend({});
 
-// Stores JHipster functions
-const jhipsterFunc = {};
+util.inherits(JhipsterGenerator, BaseGenerator);
 
-const DEF_CLIENT_BUILD = 'webpack';
-const WEB_SRC = 'src/main/webapp/';
+module.exports = JhipsterGenerator.extend({
+  constructor: function (...args) { // eslint-disable-line object-shorthand
+    generator.apply(this, args);
 
-shelljs.echo('{ "generator-jhipster": { "baseName" : ""}}').to('.yo-rc.json');
+    this.configOptions = {};
 
-module.exports = generator.extend({
+    // This adds support for a `--skip-server` flag
+    this.option('skip-server', {
+      desc: 'Skip the server-side application generation',
+      type: Boolean,
+      defaults: false
+    });
+
+        // This adds support for a `--skip-user-management` flag
+    this.option('skip-user-management', {
+      desc: 'Skip the user management module during app generation',
+      type: Boolean,
+      defaults: false
+    });
+
+        // This adds support for a `--[no-]i18n` flag
+    this.option('i18n', {
+      desc: 'Disable or enable i18n when skipping client side generation, has no effect otherwise',
+      type: Boolean,
+      defaults: true
+    });
+
+        // This adds support for a `--with-entities` flag
+    this.option('with-entities', {
+      desc: 'Regenerate the existing entities if any',
+      type: Boolean,
+      defaults: false
+    });
+
+        // This adds support for a `--skip-checks` flag
+    this.option('skip-checks', {
+      desc: 'Check the status of the required tools',
+      type: Boolean,
+      defaults: false
+    });
+
+        // This adds support for a `--npm` flag
+    this.option('npm', {
+      desc: 'Use npm instead of yarn',
+      type: Boolean,
+      defaults: false
+    });
+
+    this.currentQuestion = 0;
+    this.totalQuestions = constants.QUESTIONS;
+    this.skipServer = this.configOptions.skipServer = this.options['skip-server'] || this.config.get('skipServer');
+    this.skipUserManagement = this.configOptions.skipUserManagement = this.options['skip-user-management'] || this.config.get('skipUserManagement');
+    this.jhiPrefix = this.configOptions.jhiPrefix || this.config.get('jhiPrefix') || this.options['jhi-prefix'];
+    this.withEntities = this.options['with-entities'];
+    this.skipChecks = this.options['skip-checks'];
+    this.useYarn = this.configOptions.useYarn = !this.options.npm;
+    this.isDebugEnabled = this.configOptions.isDebugEnabled = this.options.debug;
+  },
+
   initializing: {
-
     displayLogo() {
-      this.log(chalk.white(`\nWelcome to ${chalk.bold('JHipster React')}! ${chalk.yellow(`v${packagejs.version}\n`)}`));
+      this.printJHipsterLogo();
     },
 
-    composeModule(args) {
-      /* compose with Jhipster module to get access to reusable functions from JHipster */
-      this.composeWith(require.resolve('generator-jhipster/generators/modules'), {
-        jhipsterVar,
-        jhipsterFunc,
-        skipValidation: true
-      });
+    checkJava() {
+      this.checkJava();
     },
 
-    setupClientVars() {
-      this.useSass = this.config.get('useSass');
-      this.appName = this.config.get('appName');
-      this.frontendBuilder = this.config.get('frontendBuilder');
-      this.enableTranslation = this.config.get('enableTranslation');
-      if (this.useSass != null && this.frontendBuilder != null && this.enableTranslation != null) {
-        this.existingProject = true;
+    checkNode() {
+      this.checkNode();
+    },
+
+    checkGit() {
+      this.checkGit();
+    },
+
+    checkGitConnection() {
+      this.checkGitConnection();
+    },
+
+    checkYarn() {
+      this.checkYarn();
+    },
+
+    validate() {
+      if (this.skipServer && this.skipClient) {
+        this.error(chalk.red(`You can not pass both ${chalk.yellow('--skip-client')} and ${chalk.yellow('--skip-server')} together`));
       }
-      this.totalQuestions = jhipsterVar.CONSTANTS.SERVER_QUESTIONS + 3;
     },
 
+    setupconsts() {
+      this.applicationType = this.config.get('applicationType');
+      if (!this.applicationType) {
+        this.applicationType = 'monolith';
+      }
+      this.baseName = this.config.get('baseName');
+      this.jhipsterVersion = packagejs.version;
+      if (this.jhipsterVersion === undefined) {
+        this.jhipsterVersion = this.config.get('jhipsterVersion');
+      }
+      this.otherModules = this.config.get('otherModules');
+      this.testFrameworks = this.config.get('testFrameworks');
+      this.enableTranslation = this.config.get('enableTranslation');
+      this.nativeLanguage = this.config.get('nativeLanguage');
+      this.languages = this.config.get('languages');
+      const configFound = this.baseName !== undefined && this.applicationType !== undefined;
+      if (configFound) {
+        this.existingProject = true;
+                // If translation is not defined, it is enabled by default
+        if (this.enableTranslation === undefined) {
+          this.enableTranslation = true;
+        }
+      }
+      this.clientPackageManager = this.config.get('clientPackageManager');
+      if (!this.clientPackageManager) {
+        if (this.useYarn) {
+          this.clientPackageManager = 'yarn';
+        } else {
+          this.clientPackageManager = 'npm';
+        }
+      }
+    }
   },
 
   prompting: {
-    promtClientOpts() {
-      /* Promt for Client side feature options */
-      this.log(chalk.green.bold('\n-----------------------* Client side options *-----------------------\n'));
-      if (this.existingProject) {
-        this.log(chalk.green('\nFound existing client app configuration. Using the same.\n'));
-        return;
-      }
-      const done = this.async();
-      const defaultAppBaseName = (/^[a-zA-Z0-9_]+$/.test(path.basename(process.cwd()))) ? path.basename(process.cwd()) : 'jhipster-react';
-
-      const prompts = [
-        {
-          type: 'input',
-          name: 'appName',
-          message: `(1/${this.totalQuestions}) What is the name of your ReactJS application?`,
-          default: defaultAppBaseName
-        },
-        {
-          type: 'confirm',
-          name: 'useSass',
-          message: `(2/${this.totalQuestions}) Would you like to use the LibSass stylesheet preprocessor for your CSS?`,
-          default: false
-        },
-        {
-          type: 'confirm',
-          name: 'enableTranslation',
-          message: `(3/${this.totalQuestions}) Would you like to enable translation support?`,
-          default: true
-        }
-      ];
-
-      this.prompt(prompts).then((props) => {
-        this.appName = props.appName;
-        this.enableTranslation = props.enableTranslation;
-        this.useSass = props.useSass;
-        done();
-      });
-    },
-
-    composeServerApp(args) {
-      this.log(chalk.green.bold('\n-----------------------* Server side options *-----------------------\n'));
-      /* Compose server side application using JHipster */
-      this.composeWith(require.resolve('generator-jhipster/generators/server'), {
-        i18n: this.enableTranslation,
-        configOptions: {
-          lastQuestion: 3,
-          totalQuestions: this.totalQuestions,
-          logo: false,
-          baseName: this.appName,
-          clientPackageManager: 'yarn'
-        }
-      });
-    },
+    askForInsightOptIn: prompts.askForInsightOptIn,
+    askForApplicationType: prompts.askForApplicationType,
+    askForModuleName: prompts.askForModuleName,
   },
 
   configuring: {
-    saveConfig() {
-      this.config.set('appName', this.appName);
-      this.config.set('useSass', this.useSass);
-      this.config.set('enableTranslation', this.enableTranslation);
+    setup() {
+      this.configOptions.skipI18nQuestion = true;
+      this.configOptions.baseName = this.baseName;
+      this.configOptions.logo = false;
+      this.configOptions.otherModules = this.otherModules;
+      this.configOptions.lastQuestion = this.currentQuestion;
+      this.generatorType = 'app';
+      if (this.applicationType === 'microservice') {
+        this.skipClient = true;
+        this.generatorType = 'server';
+        this.skipUserManagement = this.configOptions.skipUserManagement = true;
+      }
+      if (this.applicationType === 'uaa') {
+        this.skipClient = true;
+        this.generatorType = 'server';
+        this.skipUserManagement = this.configOptions.skipUserManagement = false;
+        this.authenticationType = this.configOptions.authenticationType = 'uaa';
+      }
+      if (this.skipClient) {
+                // defaults to use when skipping client
+        this.generatorType = 'server';
+        this.configOptions.enableTranslation = this.options.i18n;
+      }
+      if (this.skipServer) {
+        this.generatorType = 'client';
+                // defaults to use when skipping server
+      }
+      this.configOptions.clientPackageManager = this.clientPackageManager;
     },
 
-    setupVars() {
-      this.baseName = this.appName;
-      this.slugifiedBaseName = _.slugify(this.baseName);
+    composeServer() {
+      if (this.skipServer) return;
+
+      this.composeWith(require.resolve('generator-jhipster/generators/server'), {
+        'client-hook': !this.skipClient,
+        configOptions: this.configOptions,
+        force: this.options.force
+      });
+    },
+
+    composeClient() {
+      if (this.skipClient) return;
+
+      this.composeWith(require.resolve('../client'), {
+        'skip-install': this.options['skip-install'],
+        configOptions: this.configOptions,
+        force: this.options.force
+      });
+    },
+
+    askFori18n: prompts.askFori18n
+  },
+
+  default: {
+
+    askForTestOpts: prompts.askForTestOpts,
+
+    setSharedConfigOptions() {
+      this.configOptions.lastQuestion = this.currentQuestion;
+      this.configOptions.totalQuestions = this.totalQuestions;
+      this.configOptions.testFrameworks = this.testFrameworks;
+      this.configOptions.enableTranslation = this.enableTranslation;
+      this.configOptions.nativeLanguage = this.nativeLanguage;
+      this.configOptions.languages = this.languages;
+      this.configOptions.clientPackageManager = this.clientPackageManager;
+    },
+
+/*    insight() {
+      const insight = this.insight();
+      insight.trackWithEvent('generator', 'app');
+      insight.track('app/applicationType', this.applicationType);
+      insight.track('app/testFrameworks', this.testFrameworks);
+      insight.track('app/otherModules', this.otherModules);
+      insight.track('app/clientPackageManager', this.clientPackageManager);
+    },*/
+
+    composeLanguages() {
+      if (this.skipI18n) return;
+      this.composeLanguagesSub(this, this.configOptions, this.generatorType);
+    },
+
+    saveConfig() {
+      this.config.set('jhipsterVersion', packagejs.version);
+      this.config.set('applicationType', this.applicationType);
+      this.config.set('baseName', this.baseName);
+      this.config.set('testFrameworks', this.testFrameworks);
+      this.config.set('jhiPrefix', this.jhiPrefix);
+      this.config.set('otherModules', this.otherModules);
+      if (this.skipClient) this.config.set('skipClient', true);
+      if (this.skipServer) this.config.set('skipServer', true);
+      if (this.skipUserManagement) this.config.set('skipUserManagement', true);
+      this.config.set('enableTranslation', this.enableTranslation);
+      if (this.enableTranslation) {
+        this.config.set('nativeLanguage', this.nativeLanguage);
+        this.config.set('languages', this.languages);
+      }
+      this.config.set('clientPackageManager', this.clientPackageManager);
     }
   },
 
   writing: {
-    /* write client side files */
-    // writeCommonFiles() {
-    //   this.template('_package.json', 'package.json');
-    //   this.copy('.babelrc', '.babelrc');
-    //   this.copy('.gitignore', '.gitignore');
-    //   this.copy('.eslintrc', '.eslintrc');
-    // },
+    cleanup() {
+      cleanup.cleanupOldFiles(this, this.javaDir, this.testDir);
+    },
 
-    // writeWebpackFiles() {
-    //   this.copy('_webpack-production.config.js', 'webpack-production.config.js');
-    //   this.copy('_webpack-dev-server.config.js', 'webpack-dev-server.config.js');
-    //   this.copy('_server.js', 'server.js');
-    // },
-
-    // writeMainFiles() {
-    //   this.template(`${WEB_SRC}_index.html`, `${WEB_SRC}index.html`);
-    //   this.copy(`${WEB_SRC}404.html`, `${WEB_SRC}404.html`);
-    //   this.copy(`${WEB_SRC}favicon.ico`, `${WEB_SRC}favicon.ico`);
-    //   this.copy(`${WEB_SRC}htaccess.txt`, `${WEB_SRC}.htaccess`);
-    //   this.copy(`${WEB_SRC}robots.txt`, `${WEB_SRC}robots.txt`);
-    //   this.copy(`${WEB_SRC}content/css/_main.css`, `${WEB_SRC}content/css/main.css`);
-    // },
-
-    // writeAppFiles() {
-    //   this.copy(`${WEB_SRC}app/_app.jsx`, `${WEB_SRC}app/app.jsx`);
-    //   this.template(`${WEB_SRC}app/_Main.jsx`, `${WEB_SRC}app/Main.jsx`);
+    // regenerateEntities() {
+    //   if (this.withEntities) {
+    //     this.getExistingEntities().forEach((entity) => {
+    //       this.composeWith(require.resolve('../entity'), {
+    //         regenerate: true,
+    //         'skip-install': true,
+    //         force: this.options.force,
+    //         debug: this.isDebugEnabled,
+    //         arguments: [entity.name]
+    //       });
+    //     });
+    //   }
     // }
   },
 
-  install() {
-    if (this.options['skip-install']) {
-      this.log(chalk.green.bold('\nRun command `yarn install` on the project root to install required dependencies\n'));
-    } else {
-      this.log(chalk.green.bold('\nRunning YARN install. If this fails run command `yarn install` on the project root\n'));
-      this.yarnInstall();
+/*  end: {
+    localInstall() {
+      if (this.skipClient) {
+        if (this.otherModules === undefined) {
+          this.otherModules = [];
+        }
+        // Generate a package.json file containing the current version
+        // of the generator as dependency
+        this.template('_skipClientApp.package.json', 'package.json');
+
+        if (!this.options['skip-install']) {
+          if (this.clientPackageManager === 'yarn') {
+            this.log(chalk.bold(`\nInstalling generator-jhipster@${this.jhipsterVersion} locally using yarn`));
+            this.spawnCommand('yarn', ['install']);
+          } else if (this.clientPackageManager === 'npm') {
+            this.log(chalk.bold(`\nInstalling generator-jhipster@${this.jhipsterVersion} locally using npm`));
+            this.npmInstall();
+          }
+        }
+      }
     }
-  }
+  }*/
 });

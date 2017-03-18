@@ -1,0 +1,7 @@
+Description:
+    Creates a new JHipster React client side application based on the selected options
+
+Example:
+    yo jhipster-react:client
+
+    This will create an React client app
