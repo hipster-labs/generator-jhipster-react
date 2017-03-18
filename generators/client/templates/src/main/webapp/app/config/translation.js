@@ -1,5 +1,5 @@
 import counterpart from 'counterpart';
-import { setLocale } from '../reducers/locale.reducer';
+import { setLocale } from '../reducers/locale';
 
 const mergeTranslations = (requireContext) => {
   const merged = {};

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Translate from 'react-translate-component';
-import { getUsers } from '../../reducers/administration.reducer';
+import { getUsers } from '../../reducers/administration';
 
 export class UserManagement extends Component {
 

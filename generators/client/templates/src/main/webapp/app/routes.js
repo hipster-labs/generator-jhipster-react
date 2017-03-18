@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import AppComponent from './App';
-import privateRoute from './shared/util/private.route';
+import PrivateRoute from './shared/components/private-route/PrivateRoute';
 
 if (typeof require.ensure !== 'function') {
   require.ensure = function requireModule(deps, callback) {
@@ -14,30 +14,16 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/home/Home');
   require('./modules/login/Login');
-  // require('../modules/administration/GatewayPage');
-  // require('./modules/administration/LogsPage');
-  // require('../modules/administration/HealthPage');
-  // require('../modules/administration/MetricsPage');
-  // require('../modules/administration/UserManagementPage');
-  // require('../modules/administration/ConfigurationPage');
-  // require('../modules/administration/AuditsPage');
-  // require('./modules/administration/ApiDocsPage');
+  // require('./modules/administration/gateway/Gateway');
+  // require('./modules/administration/logs/Logs');
+  // require('./modules/administration/health/Health');
+  // require('./modules/administration/metrics/Metrics');
+  // require('./modules/administration/user-management/UserManagement');
+  // require('./modules/administration/configuration/Configuration');
+  // require('./modules/administration/audits/Audits');
+  // require('./modules/administration/docs/ApiDocs');
   /* eslint-enable */
 }
-/* TODO get this working to be modular
-export default (onLogout) => {
-  return {
-    childRoutes: [{
-      path: '/',
-      component: require('./App').default,
-      indexRoute: require('./modules/home').default,
-      childRoutes: [
-        require('./modules/login').LoginRoute,
-        require('./modules/login').LogoutRoute
-      ]
-    }]
-  };
-};*/
 
 // react-router setup with code-splitting
 // More info: http://blog.mxstbr.com/2016/01/react-apps-with-pages/
@@ -73,7 +59,7 @@ export default (onLogout) => {
         path="/admin/gateway"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/GatewayPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/gateway/Gateway').default));
           });
         }}
       />
@@ -81,8 +67,8 @@ export default (onLogout) => {
         path="/admin/logs"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            // cb(null, privateRoute(require('./modules/administration/LogsPage').default));
-            cb(null, (require('./modules/administration/LogsPage').default));
+            // cb(null, PrivateRoute(require('./modules/administration/Logs').default));
+            cb(null, (require('./modules/administration/logs/Logs').default));
           });
         }}
       />
@@ -90,7 +76,7 @@ export default (onLogout) => {
         path="/admin/health"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/HealthPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/health/Health').default));
           });
         }}
       />
@@ -98,7 +84,7 @@ export default (onLogout) => {
         path="/admin/metrics"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/MetricsPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/metrics/Metrics').default));
           });
         }}
       />
@@ -106,7 +92,7 @@ export default (onLogout) => {
         path="/admin/user-management"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/UserManagementPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/user-management/UserManagement').default));
           });
         }}
       />
@@ -114,7 +100,7 @@ export default (onLogout) => {
         path="/admin/configuration"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/ConfigurationPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/configuration/Configuration').default));
           });
         }}
       />
@@ -122,7 +108,7 @@ export default (onLogout) => {
         path="/admin/audits"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, privateRoute(require('./modules/administration/AuditsPage').default));
+            cb(null, PrivateRoute(require('./modules/administration/audits/Audits').default));
           });
         }}
       />
@@ -130,8 +116,8 @@ export default (onLogout) => {
         path="/admin/docs"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            // cb(null, privateRoute(require('./modules/administration/ApiDocsPage').default));
-            cb(null, require('./modules/administration/ApiDocsPage').default);
+            // cb(null, PrivateRoute(require('./modules/administration/docs/ApiDocs').default));
+            cb(null, require('./modules/administration/docs/ApiDocs').default);
           });
         }}
       />

@@ -69,8 +69,8 @@ const files = {
         'App.js',
         'index.js',
         'routes.js',
-        'config/app.config.js',
-        'config/theme.config.js',
+        'config/app.js',
+        'config/theme.js',
         'config/devtools.js',
         'config/promise-middleware.js',
         'config/store.js'
@@ -125,15 +125,15 @@ const files = {
       templates: [
         // home module
         'reducers/index.js',
-        'reducers/administration.reducer.js',
-        'reducers/authentication.reducer.js'
+        'reducers/administration.js',
+        'reducers/authentication.js'
       ]
     },
     {
       condition: generator => generator.enableTranslation,
       path: REACT_DIR,
       templates: [
-        'reducers/locale.reducer.js'
+        'reducers/locale.js'
       ]
     }
   ],
@@ -265,12 +265,12 @@ const files = {
         // layouts
         'shared/components/footer/Footer.js',
         'shared/components/header/Header.js',
+        'shared/components/private-route/PrivateRoute.js',
         // interceptors
         'shared/interceptors/axios.js',
         // util
         'shared/util/global-style.js',
-        'shared/util/log-util.js',
-        'shared/util/private.route.js'
+        'shared/util/log-util.js'
       ]
     },
     {

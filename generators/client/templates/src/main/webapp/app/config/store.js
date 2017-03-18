@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from '../reducers';
 import DevTools from './devtools';
-import promiseMiddleware from './promiseMiddleware';
+import promiseMiddleware from './promise-middleware';
 
 const middlewares = process.env.NODE_ENV === 'development' ?
   [applyMiddleware(promiseMiddleware), DevTools.instrument()] :
@@ -24,4 +24,3 @@ const initialize = (initialState = {}) => {
 };
 
 export default initialize;
-

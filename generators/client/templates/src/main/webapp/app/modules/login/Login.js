@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 import LoginModal from './LoginModal';
-import { login } from '../../reducers/authentication.reducer';
+import { login } from '../../reducers/authentication';
 
 export class Login extends Component {
 

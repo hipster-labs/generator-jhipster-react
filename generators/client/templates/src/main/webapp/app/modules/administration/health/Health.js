@@ -2,39 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Translate from 'react-translate-component';
-import { systemMetrics } from '../../reducers/administration.reducer';
+import { systemHealth } from '../../reducers/administration';
 
-export class MetricsPage extends Component {
+export class HealthPage extends Component {
 
   constructor(props) {
     super(props);
-    this.getMetrics = this.getMetrics.bind(this);
+    this.getSystemHealth = this.getSystemHealth.bind(this);
   }
 
   componentDidMount() {
-    this.props.systemMetrics();
+    this.props.systemHealth();
   }
 
-  getMetrics() {
+  getSystemHealth() {
     if (!this.props.isFetching) {
-      this.props.systemMetrics();
+      this.props.systemHealth();
     }
   }
 
   render() {
-    const { metrics, isFetching } = this.props;
-    const data = metrics || {};
+    const { health, isFetching } = this.props;
+    const data = health || {};
     return (
       <div className="well">
         <div>
-          <h2 translate="metrics.title">Application Metrics</h2>
+          <h2 translate="health.title">Health Checks</h2>
           <p>
-            <button type="button" onClick={() => this.getMetrics()} className={isFetching ? 'btn btn-danger' : 'btn btn-primary'} disabled={isFetching}>
+            <button type="button" onClick={() => this.getSystemHealth()} className={isFetching ? 'btn btn-danger' : 'btn btn-primary'} disabled={isFetching}>
               <span className="glyphicon glyphicon-refresh" />&nbsp;
               <Translate component="span" content="health.refresh.button" />
             </button>
           </p>
-          FIX ME
+          FIX ME datatable
           <hr />
           <div className="row">
             <div className="col-sm-10">
@@ -48,6 +48,6 @@ export class MetricsPage extends Component {
 }
 
 export default connect(
-  ({ administration }) => ({ metrics: administration.metrics, isFetching: administration.isFetching }),
-  { systemMetrics }
-)(MetricsPage);
+  ({ administration }) => ({ health: administration.health, isFetching: administration.isFetching }),
+  { systemHealth }
+)(HealthPage);

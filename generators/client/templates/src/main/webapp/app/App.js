@@ -2,14 +2,15 @@ import 'flexboxgrid/dist/flexboxgrid.css';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { locales } from './config/translation';
 
-import './app.scss';
-import { getSession, logout } from './reducers/authentication.reducer';
-import { setLocale } from './reducers/locale.reducer';
+import { locales } from './config/translation';
+import appTheme from './config/theme';
+import { setLocale } from './reducers/locale';
+import { getSession, logout } from './reducers/authentication';
 import Header from './shared/components/header/Header';
 import Footer from './shared/components/footer/Footer';
-import appTheme from './config/theme.config';
+
+import './app.scss';
 
 export class App extends Component {
   static propTypes = {

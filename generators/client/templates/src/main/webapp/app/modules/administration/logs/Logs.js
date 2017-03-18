@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Translate from 'react-translate-component';
-import { getLoggers, changeLogLevel } from '../../reducers/administration.reducer';
+import { getLoggers, changeLogLevel } from '../../reducers/administration';
 
 export class LogsPage extends Component {
 

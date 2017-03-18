@@ -6,8 +6,8 @@ import { TextField, RaisedButton, Checkbox, Popover, Subheader, Avatar, FontIcon
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import { List, ListItem } from 'material-ui/List';
 
-import { log } from '../../shared/util/logUtil';
-import { getSession } from '../../reducers/authentication.reducer';
+import { log } from '../../shared/util/log-util';
+import { getSession } from '../../reducers/authentication';
 
 import './home.scss';
 

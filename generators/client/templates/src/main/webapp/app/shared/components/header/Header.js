@@ -4,9 +4,11 @@ import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import { Link } from 'react-router';
+
 import { locales } from '../../../config/translation';
-import appConfig from '../../../config/appConfig';
-import { HEADER_COLOR } from '../../util/globalStyle';
+import appConfig from '../../../config/app';
+import { HEADER_COLOR } from '../../util/global-style';
+
 import './header.scss';
 
 export default class Header extends Component {
@@ -64,4 +66,3 @@ export default class Header extends Component {
     );
   }
 }
-

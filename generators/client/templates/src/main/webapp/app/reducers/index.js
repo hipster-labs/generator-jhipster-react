@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
-import authentication from './authentication.reducer';
-import locale from './locale.reducer';
-import administration from './administration.reducer';
+import locale from './locale';
+import authentication from './authentication';
+import administration from './administration';
 
 export default combineReducers({
   authentication,
