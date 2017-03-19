@@ -88,7 +88,7 @@ export class Home extends Component {
             </li>
             <li>
               <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-                <Translate content="home.questilink.chat">JHipster public chat room</Translate>
+                <Translate content="home.link.chat">JHipster public chat room</Translate>
               </a>
             </li>
             <li>

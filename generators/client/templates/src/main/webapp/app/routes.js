@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
   // require('./modules/administration/user-management/UserManagement');
   // require('./modules/administration/configuration/Configuration');
   // require('./modules/administration/audits/Audits');
-  // require('./modules/administration/docs/ApiDocs');
+  require('./modules/administration/docs/Docs');
   /* eslint-enable */
 }
 
@@ -112,16 +112,16 @@ export default (onLogout) => {
           });
         }}
       />
+      */}
       <Route
         path="/admin/docs"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            // cb(null, PrivateRoute(require('./modules/administration/docs/ApiDocs').default));
-            cb(null, require('./modules/administration/docs/ApiDocs').default);
+            // cb(null, PrivateRoute(require('./modules/administration/docs/Docs').default));
+            cb(null, require('./modules/administration/docs/Docs').default);
           });
         }}
       />
-    */}
     </Route>
   );
 };
