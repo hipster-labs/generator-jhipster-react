@@ -26,11 +26,13 @@ npm install -g yo
 npm install -g generator-jhipster
 ```
 
-clone [JHipster](https://github.com/jhipster/generator-jhipster) and run `npm link` inside it
-clone this project and run `npm link` and `npm link generator-jhipster` inside it.
+Clone [JHipster](https://github.com/jhipster/generator-jhipster) and run `npm link` inside it.
+
+Clone this project and run `npm link` and `npm link generator-jhipster` inside it.
 
 Now all the projects are pointing to latest master versions
-Then generate your new awesome project:
+
+Now generate your new awesome project:
 
 ```bash
 yo jhipster-react
