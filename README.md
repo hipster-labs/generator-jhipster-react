@@ -7,11 +7,19 @@
 
 **Attention: This is still a work in progress**
 
+TODO:
+ -[] Migrate Account modules
+ -[] Migrate Admin modules
+ -[] support no i18n properly
+ -[] support no-sass option
+ -[] Add entity sub generator
+ -[] Add import-jdl sub generator
+ -[] Migrate protractor tests
+
 First, install [Yeoman](http://yeoman.io) and [JHipster](http://jhipster.github.io/), then install generator-jhipster-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-jhipster
 npm install -g generator-jhipster-react
 ```
 
@@ -22,7 +30,7 @@ yo jhipster-react
 ```
 As this is a generator which runs on top of [JHipster](http://jhipster.github.io/), we expect you have [JHipster and its related tools already installed](http://jhipster.github.io/installation.html).
 
-This generator requires Jhipster version 2.27 or greater in order to work
+This generator requires Jhipster version 4.1 or greater in order to work
 
 ## Development-mode
 
@@ -31,7 +39,7 @@ Frontend is working through [webpack-dev-server](webpack-dev-server-url) proxy m
 To start frontend server please run the following command:
 
 ```bash
-npm start
+yarn start
 ```
 
 ## Contributing

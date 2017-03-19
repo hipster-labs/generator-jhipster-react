@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('./modules/home/Home');
   require('./modules/login/Login');
   // require('./modules/administration/gateway/Gateway');
-  // require('./modules/administration/logs/Logs');
+  require('./modules/administration/logs/Logs');
   // require('./modules/administration/health/Health');
   // require('./modules/administration/metrics/Metrics');
   // require('./modules/administration/user-management/UserManagement');
@@ -64,15 +64,6 @@ export default (onLogout) => {
         }}
       />
       <Route
-        path="/admin/logs"
-        getComponent={(nextState, cb) => {
-          require.ensure([], (require) => {
-            // cb(null, PrivateRoute(require('./modules/administration/Logs').default));
-            cb(null, (require('./modules/administration/logs/Logs').default));
-          });
-        }}
-      />
-      <Route
         path="/admin/health"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
@@ -113,6 +104,15 @@ export default (onLogout) => {
         }}
       />
       */}
+      <Route
+        path="/admin/logs"
+        getComponent={(nextState, cb) => {
+          require.ensure([], (require) => {
+            // cb(null, PrivateRoute(require('./modules/administration/Logs').default));
+            cb(null, (require('./modules/administration/logs/Logs').default));
+          });
+        }}
+      />
       <Route
         path="/admin/docs"
         getComponent={(nextState, cb) => {
