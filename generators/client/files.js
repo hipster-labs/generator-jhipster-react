@@ -36,9 +36,7 @@ const files = {
     {
       path: MAIN_SRC_DIR,
       templates: [
-        { file: 'static/images/_hipster.png', method: 'copy' },
-        { file: 'static/images/_hipster2x.png', method: 'copy' },
-        { file: 'static/images/_logo-jhipster.png', method: 'copy' }
+        { file: 'static/images/logo-jhipster-react.svg', method: 'copy' }
       ]
     }
   ],

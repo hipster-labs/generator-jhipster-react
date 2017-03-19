@@ -38,37 +38,73 @@ export class Home extends Component {
     const { currentUser } = this.state;
 
     return (
-      <div className="">
-        <div className="row">
-          <div className="col-md-12">
-            <h2><Translate content="home.welcome">Welcome to jhi</Translate></h2>
-            <div>
-              {
-                (currentUser && currentUser.login) ? (
-                  <div>
-                    <div className="alert alert-success">
-                      <Translate content="home.logged-success">You are logged in as</Translate> &quot;{ currentUser.login }&quot;
-                    </div>
-                    <form onSubmit={this.searchForJenkinsJobNames}>
-                      <div className="row middle-xs">
-                        <div className="col-xs-10" />
-                        <div className="col-xs-2" />
-                      </div>
-                    </form>
-                    <div className="row" />
-                  </div>
-                ) : (
-                  <div>
-                    <div className="alert alert-warning">
-                      If you want to <Link to="/login" className="alert-link">sign in</Link>, you can try the default accounts:
-                      <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                      <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-                    </div>
-                  </div>
-                )
-              }
-            </div>
-          </div>
+      <div className="row">
+        <div className="col-md-9">
+          <h2><Translate content="home.title">Welcome, Java Hipster!</Translate></h2>
+          <p className="lead"><Translate content="home.subtitle">This is your homepage</Translate></p>
+          {
+            (currentUser && currentUser.login) ? (
+              <div>
+                <div className="alert alert-success">
+                  <Translate content="home.logged.message">You are logged in as user </Translate> &quot;{ currentUser.login }&quot;
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="alert alert-warning">
+                  <Translate content="global.messages.info.authenticated.prefix">If you want to </Translate>
+                  <Link to="/login" className="alert-link"><Translate content="global.messages.info.authenticated.link">sign in</Translate></Link>
+                  <Translate content="global.messages.info.authenticated.suffix">, you can try the default accounts:
+                  <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
+                  <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).</Translate>
+                </div>
+
+                <div className="alert alert-warning">
+                  <Translate content="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
+                  <a className="alert-link"><Translate content="global.messages.info.register.link">Register a new account</Translate></a>
+                </div>
+              </div>
+            )
+          }
+          <p>
+            <Translate content="home.question">If you have any question on JHipster:</Translate>
+          </p>
+
+          <ul>
+            <li>
+              <a href="http://jhipster.github.io/" target="_blank" rel="noopener noreferrer">
+                <Translate content="home.link.homepage">JHipster homepage</Translate>
+              </a>
+            </li>
+            <li>
+              <a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
+                <Translate content="home.link.stackoverflow">JHipster on Stack Overflow</Translate>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
+                <Translate content="home.link.bugtracker">JHipster bug tracker</Translate>
+              </a>
+            </li>
+            <li>
+              <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
+                <Translate content="home.questilink.chat">JHipster public chat room</Translate>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/java_hipster" target="_blank" rel="noopener noreferrer">
+                <Translate content="home.link.follow">follow @java_hipster on Twitter</Translate>
+              </a>
+            </li>
+          </ul>
+
+          <p>
+            <span>If you like JHipster React, do not forget to give us a star on </span>
+            <a href="https://github.com/jhipster/generator-jhipster-react" target="_blank" rel="noopener noreferrer">Github</a>!
+          </p>
+        </div>
+        <div className="col-md-3 pad">
+          <span className="hipster img-fluid img-rounded" />
         </div>
       </div>
     );
