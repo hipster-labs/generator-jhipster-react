@@ -5,7 +5,7 @@
 
 ## Installation
 
-**Attention: This is still a work in progress**
+**Attention: This is still a work in progress. Use the below steps to use the unreleased development version**
 
 TODO:
  -[] Migrate Account modules
@@ -15,19 +15,28 @@ TODO:
  -[] Add entity sub generator
  -[] Add import-jdl sub generator
  -[] Migrate protractor tests
+ -[] Add generator tests
+ -[] Add generator travis builds
 
 First, install [Yeoman](http://yeoman.io) and [JHipster](http://jhipster.github.io/), then install generator-jhipster-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-jhipster-react
+npm install -g generator-jhipster
 ```
 
+clone [JHipster](https://github.com/jhipster/generator-jhipster) and run `npm link` inside it
+clone this project and run `npm link` and `npm link generator-jhipster` inside it.
+
+Now all the projects are pointing to latest master versions
 Then generate your new awesome project:
 
 ```bash
 yo jhipster-react
 ```
+
+Make sure to run `npm link generator-jhipster-react` within the generated project if you are regenerating it again.
+
 As this is a generator which runs on top of [JHipster](http://jhipster.github.io/), we expect you have [JHipster and its related tools already installed](http://jhipster.github.io/installation.html).
 
 This generator requires Jhipster version 4.1 or greater in order to work
