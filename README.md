@@ -8,15 +8,16 @@
 **Attention: This is still a work in progress. Use the below steps to use the unreleased development version**
 
 TODO:
- -[] Migrate Account modules
- -[] Migrate Admin modules
- -[] support no i18n properly
- -[] support no-sass option
- -[] Add entity sub generator
- -[] Add import-jdl sub generator
- -[] Migrate protractor tests
- -[] Add generator tests
- -[] Add generator travis builds
+
+- Migrate Account modules
+- Migrate Admin modules
+- support no i18n properly
+- support no-sass option
+- Add entity sub generator
+- Add import-jdl sub generator
+- Migrate protractor tests
+- Add generator tests
+- Add generator travis builds
 
 First, install [Yeoman](http://yeoman.io) and [JHipster](http://jhipster.github.io/), then install generator-jhipster-react using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
