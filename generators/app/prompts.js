@@ -56,10 +56,10 @@ function askForApplicationType() {
         value: 'gateway',
         name: 'Microservice gateway'
       },
-      {
-        value: 'uaa',
-        name: '[BETA] JHipster UAA server (for microservice OAuth2 authentication)'
-      }
+      // {
+      //   value: 'uaa',
+      //   name: '[BETA] JHipster UAA server (for microservice OAuth2 authentication)'
+      // }
     ],
     default: DEFAULT_APPTYPE
   }).then((prompt) => {
