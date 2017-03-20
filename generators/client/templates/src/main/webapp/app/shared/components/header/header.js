@@ -17,7 +17,7 @@ import {
 import { Link } from 'react-router';
 
 import { locales } from '../../../config/translation';
-import appConfig from '../../../config/app';
+import appConfig from '../../../config/constants';
 import { HEADER_COLOR } from '../../util/global-style';
 
 import './header.scss';

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Translate from 'react-translate-component';
 import { connect } from 'react-redux';
-import { TextField, RaisedButton, Checkbox, Popover, Subheader, Avatar, FontIcon } from 'material-ui';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
-import { List, ListItem } from 'material-ui/List';
 
 import { log } from '../../shared/util/log-util';
 import { getSession } from '../../reducers/authentication';
