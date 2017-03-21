@@ -64,10 +64,10 @@ const files = {
     {
       path: REACT_DIR,
       templates: [
-        'App.js',
+        'app.js',
         'index.js',
         'routes.js',
-        'config/app.js',
+        'config/constants.js',
         'config/theme.js',
         'config/devtools.js',
         'config/promise-middleware.js',
@@ -109,11 +109,11 @@ const files = {
       templates: [
         // home module
         'modules/home/index.js',
-        { file: 'modules/home/Home.js', method: 'processJsx' },
+        { file: 'modules/home/home.js', method: 'processJsx' },
         // login module
         'modules/login/index.js',
-        { file: 'modules/login/Login.js', method: 'processJsx' },
-        { file: 'modules/login/LoginModal.js', method: 'processJsx' }
+        { file: 'modules/login/login.js', method: 'processJsx' },
+        { file: 'modules/login/login-modal.js', method: 'processJsx' }
       ]
     },
     {
@@ -210,12 +210,12 @@ const files = {
       path: REACT_DIR,
       templates: [
         // admin modules
-        { file: 'modules/administration/audits/Audits.js', method: 'processJsx' },
-        { file: 'modules/administration/configuration/Configuration.js', method: 'processJsx' },
-        { file: 'modules/administration/docs/Docs.js', method: 'processJsx' },
-        { file: 'modules/administration/health/Health.js', method: 'processJsx' },
-        { file: 'modules/administration/logs/Logs.js', method: 'processJsx' },
-        { file: 'modules/administration/metrics/Metrics.js', method: 'processJsx' },
+        { file: 'modules/administration/audits/audits.js', method: 'processJsx' },
+        { file: 'modules/administration/configuration/configuration.js', method: 'processJsx' },
+        { file: 'modules/administration/docs/docs.js', method: 'processJsx' },
+        { file: 'modules/administration/health/health.js', method: 'processJsx' },
+        { file: 'modules/administration/logs/logs.js', method: 'processJsx' },
+        { file: 'modules/administration/metrics/metrics.js', method: 'processJsx' },
       ]
     },
     // {
@@ -229,7 +229,7 @@ const files = {
       condition: generator => !generator.skipUserManagement,
       path: REACT_DIR,
       templates: [
-        { file: 'modules/administration/user-management/UserManagement.js', method: 'processJsx' },
+        { file: 'modules/administration/user-management/user-management.js', method: 'processJsx' },
         // { file: 'modules/administration/user-management/UserManagementDetail.js', method: 'processJsx' },
         // { file: 'modules/administration/user-management/UserManagementDialog.js', method: 'processJsx' },
         // { file: 'modules/administration/user-management/UserManagementDeleteDialog.js', method: 'processJsx' }
@@ -239,7 +239,7 @@ const files = {
       condition: generator => generator.applicationType === 'gateway',
       path: REACT_DIR,
       templates: [
-        { file: 'modules/administration/gateway/Gateway.js', method: 'processJsx' }
+        { file: 'modules/administration/gateway/gateway.js', method: 'processJsx' }
       ]
     }
   ],
@@ -248,9 +248,9 @@ const files = {
       path: REACT_DIR,
       templates: [
         // layouts
-        'shared/components/footer/Footer.js',
-        'shared/components/header/Header.js',
-        'shared/components/private-route/PrivateRoute.js',
+        'shared/components/footer/footer.js',
+        'shared/components/header/header.js',
+        'shared/components/private-route/private-route.js',
         // interceptors
         'shared/interceptors/axios.js',
         // util
