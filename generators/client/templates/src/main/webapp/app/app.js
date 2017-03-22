@@ -1,4 +1,5 @@
 import 'flexboxgrid/dist/flexboxgrid.css';
+import 'fixed-data-table-2/dist/fixed-data-table.css';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
