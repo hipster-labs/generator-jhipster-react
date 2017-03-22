@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== 'production') {
   // require('./modules/administration/metrics/metrics');
   // require('./modules/administration/user-management/user-management');
   // require('./modules/administration/configuration/configuration');
-  // require('./modules/administration/audits/audits');
+  require('./modules/administration/audits/audits');
   require('./modules/administration/docs/docs');
   /* eslint-enable */
 }

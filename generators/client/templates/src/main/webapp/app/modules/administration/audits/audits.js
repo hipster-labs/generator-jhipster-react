@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Translate from 'react-translate-component';
+import { Table, Column } from 'fixed-data-table-2';
 
 import { getAudits } from '../../reducers/administration';
 
@@ -26,18 +27,41 @@ export class AuditsPage extends Component {
     return (
       <div className="well">
         <div>
-          <h2 translate="health.title">Audits</h2>
-          <p>
-            <button type="button" onClick={() => this.getAuditList()} className={isFetching ? 'btn btn-danger' : 'btn btn-primary'} disabled={isFetching}>
-              <span className="glyphicon glyphicon-refresh" />&nbsp;
-              <Translate component="span" content="health.refresh.button" />
-            </button>
-          </p>
-          FIX ME datatable, pagination and filter by date
+          <h2 translate="audits.title">Audits</h2>
+          FIX ME pagination and filter by date and sorting
           <hr />
           <div className="row">
-            <div className="col-sm-10">
-              {JSON.stringify(audits)}
+            <div className="col-sm-12">
+              <Table rowHeight={50}
+                rowsCount={audits.length}
+                headerHeight={50}
+                width={1000}
+                maxHeight={500} >
+                <Column
+                  header={<Cell>Time stamp</Cell>}
+                  cell={<TextCell data={audits} col="timestamp" />}
+                  flexGrow={1}
+                  width={100}
+                />
+                <Column
+                  header={<Cell>Principal</Cell>}
+                  cell={<TextCell data={audits} col="principal" />}
+                  flexGrow={1}
+                  width={100}
+                />
+                <Column
+                  header={<Cell>Address</Cell>}
+                  cell={<NestedTextCell data={audits} col="data" child="remoteAddress" />}
+                  flexGrow={1}
+                  width={100}
+                />
+                <Column
+                  header={<Cell>Type</Cell>}
+                  cell={<TextCell data={audits} col="type" />}
+                  flexGrow={1}
+                  width={100}
+                />
+              </Table>
             </div>
           </div>
         </div>
