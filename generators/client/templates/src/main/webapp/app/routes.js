@@ -96,6 +96,7 @@ export default (onLogout) => {
           });
         }}
       />
+      */}
       <Route
         path="/admin/audits"
         getComponent={(nextState, cb) => {
@@ -104,7 +105,6 @@ export default (onLogout) => {
           });
         }}
       />
-      */}
       <Route
         path="/admin/logs"
         getComponent={(nextState, cb) => {
