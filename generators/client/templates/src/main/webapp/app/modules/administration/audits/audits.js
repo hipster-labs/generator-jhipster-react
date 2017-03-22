@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Translate from 'react-translate-component';
-import { Table, Column } from 'fixed-data-table-2';
+
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import { getAudits } from '../../reducers/administration';
 
@@ -32,35 +33,27 @@ export class AuditsPage extends Component {
           <hr />
           <div className="row">
             <div className="col-sm-12">
-              <Table rowHeight={50}
-                rowsCount={audits.length}
-                headerHeight={50}
-                width={1000}
-                maxHeight={500} >
-                <Column
-                  header={<Cell>Time stamp</Cell>}
-                  cell={<TextCell data={audits} col="timestamp" />}
-                  flexGrow={1}
-                  width={100}
-                />
-                <Column
-                  header={<Cell>Principal</Cell>}
-                  cell={<TextCell data={audits} col="principal" />}
-                  flexGrow={1}
-                  width={100}
-                />
-                <Column
-                  header={<Cell>Address</Cell>}
-                  cell={<NestedTextCell data={audits} col="data" child="remoteAddress" />}
-                  flexGrow={1}
-                  width={100}
-                />
-                <Column
-                  header={<Cell>Type</Cell>}
-                  cell={<TextCell data={audits} col="type" />}
-                  flexGrow={1}
-                  width={100}
-                />
+              <Table>
+                <TableHeader
+                  displaySelectAll={this.state.showCheckboxes}
+                  adjustForCheckbox={this.state.showCheckboxes}>
+                  <TableRow>
+                    <TableHeaderColumn>Timestamp</TableHeaderColumn>
+                    <TableHeaderColumn>Principal</TableHeaderColumn>
+                    <TableHeaderColumn>Address</TableHeaderColumn>
+                    <TableHeaderColumn>Type</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                  {audits.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableRowColumn>{row.timestamp}</TableRowColumn>
+                      <TableRowColumn>{row.principal}</TableRowColumn>
+                      <TableRowColumn>{row.data.remoteAddress}</TableRowColumn>
+                      <TableRowColumn>{row.type}</TableRowColumn>
+                    </TableRow>
+                  ))}
+                </TableBody>
               </Table>
             </div>
           </div>
