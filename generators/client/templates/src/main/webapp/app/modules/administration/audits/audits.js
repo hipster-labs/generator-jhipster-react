@@ -10,6 +10,7 @@ export class AuditsPage extends Component {
 
   constructor(props) {
     super(props);
+    this.state = { showCheckboxes: false };
     this.getAuditList = this.getAuditList.bind(this);
   }
 

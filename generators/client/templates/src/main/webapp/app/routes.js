@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
   // require('./modules/administration/health/health');
   // require('./modules/administration/metrics/metrics');
   // require('./modules/administration/user-management/user-management');
-  // require('./modules/administration/configuration/configuration');
+  require('./modules/administration/configuration/configuration');
   require('./modules/administration/audits/audits');
   require('./modules/administration/docs/docs');
   /* eslint-enable */
@@ -88,15 +88,15 @@ export default (onLogout) => {
           });
         }}
       />
+      */}
       <Route
         path="/admin/configuration"
         getComponent={(nextState, cb) => {
           require.ensure([], (require) => {
-            cb(null, PrivateRoute(require('./modules/administration/configuration/Configuration').default));
+            cb(null, PrivateRoute(require('./modules/administration/configuration/configuration').default));
           });
         }}
       />
-      */}
       <Route
         path="/admin/audits"
         getComponent={(nextState, cb) => {
