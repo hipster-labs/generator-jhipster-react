@@ -6,8 +6,14 @@
   "author": {
     "name": "Deepu KS",
     "email": "d4udts@gmail.com",
-    "url": "http://deepu105.github.io"
+    "url": "https://deepu105.github.io"
   },
+  "contributors": [
+    "Deepu KS <d4udts@gmail.com> (https://deepu105.github.io)",
+    "Sendil Kumar N <sendilkumarn@live.com> (https://sendilkumarn.js.org)",
+    "Yuri <yuri.kushch@gmail.com> (http://ykushch.net)",
+    "gdoslu (https://github.com/gdoslu)"
+  ],
   "files": [
     "generators/app",
     "generators/entity"
