@@ -10,7 +10,6 @@ export class AuditsPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showCheckboxes: false };
     this.getAuditList = this.getAuditList.bind(this);
   }
 
@@ -25,6 +24,7 @@ export class AuditsPage extends Component {
   }
 
   render() {
+    const showCheckboxes = false;
     const { audits, isFetching } = this.props;
     return (
       <div className="well">
@@ -36,8 +36,8 @@ export class AuditsPage extends Component {
             <div className="col-sm-12">
               <Table>
                 <TableHeader
-                  displaySelectAll={this.state.showCheckboxes}
-                  adjustForCheckbox={this.state.showCheckboxes}>
+                  displaySelectAll={showCheckboxes}
+                  adjustForCheckbox={showCheckboxes}>
                   <TableRow>
                     <TableHeaderColumn>Timestamp</TableHeaderColumn>
                     <TableHeaderColumn>Principal</TableHeaderColumn>
@@ -45,7 +45,7 @@ export class AuditsPage extends Component {
                     <TableHeaderColumn>Type</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                <TableBody displayRowCheckbox={showCheckboxes}>
                   {audits.map((row, index) => (
                     <TableRow key={index}>
                       <TableRowColumn>{row.timestamp}</TableRowColumn>

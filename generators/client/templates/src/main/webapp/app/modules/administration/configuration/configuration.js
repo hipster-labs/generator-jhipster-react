@@ -10,7 +10,6 @@ export class ConfigurationPage extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { showCheckboxes: false };
     this.getConfigurationList = this.getConfigurationList.bind(this);
   }
 
@@ -27,6 +26,7 @@ export class ConfigurationPage extends Component {
   }
 
   render() {
+    const showCheckboxes = false;
     const { configuration, isFetching } = this.props;
     const configProps = (configuration && configuration.configProps) ? configuration.configProps : {};
     const env = (configuration && configuration.env) ? configuration.env : {};
@@ -41,15 +41,15 @@ export class ConfigurationPage extends Component {
             <div className="col-sm-12">
               <Table>
                 <TableHeader
-                  displaySelectAll={this.state.showCheckboxes}
-                  adjustForCheckbox={this.state.showCheckboxes}
+                  displaySelectAll={showCheckboxes}
+                  adjustForCheckbox={showCheckboxes}
                 >
                   <TableRow>
                     <TableHeaderColumn>Prefix</TableHeaderColumn>
                     <TableHeaderColumn>Properties</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
-                <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                <TableBody displayRowCheckbox={showCheckboxes}>
                   {Object.keys(configProps).map((configPropKey, configPropIndex) => (
                     <TableRow key={configPropIndex}>
                       <TableRowColumn>{configProps[configPropKey].prefix}</TableRowColumn>
@@ -75,15 +75,15 @@ export class ConfigurationPage extends Component {
                   <h4> {envKey} </h4>
                   <Table>
                     <TableHeader
-                      displaySelectAll={this.state.showCheckboxes}
-                      adjustForCheckbox={this.state.showCheckboxes}
+                      displaySelectAll={showCheckboxes}
+                      adjustForCheckbox={showCheckboxes}
                     >
                       <TableRow key={envIndex}>
                         <TableHeaderColumn>Prefix</TableHeaderColumn>
                         <TableHeaderColumn>Properties</TableHeaderColumn>
                       </TableRow>
                     </TableHeader>
-                    <TableBody displayRowCheckbox={this.state.showCheckboxes}>
+                    <TableBody displayRowCheckbox={showCheckboxes}>
                       {env[envKey] ?
                           typeof env[envKey] === 'object' ?
                             Object.keys(env[envKey]).map((propKey, propIndex) => (
