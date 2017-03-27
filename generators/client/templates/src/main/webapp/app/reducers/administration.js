@@ -5,6 +5,7 @@ const FETCH_GATEWAY_ROUTE = 'administration/FETCH_GATEWAY_ROUTE';
 const FETCH_LOGS = 'administration/FETCH_LOGS';
 const FETCH_LOGS_CHANGE_LEVEL = 'administration/FETCH_LOGS_CHANGE_LEVEL';
 const FETCH_HEALTH = 'administration/FETCH_HEALTH';
+const FETCH_HEALTH_INFO = 'administration/FETCH_HEALTH_INFO';
 const FETCH_METRICS = 'administration/FETCH_METRICS';
 const FETCH_USERS = 'administration/FETCH_USERS';
 const FETCH_CONFIGURATIONS = 'administration/FETCH_CONFIGURATIONS';
@@ -113,6 +114,12 @@ export default function reducer(state = initialState, action) {
         health: action.result.data,
         loading: false
       };
+    case FETCH_HEALTH_INFO:
+      return {
+        ...state,
+        health: action.result,
+        loading: false
+      };
     case FETCH_API_DOCS:
       return {
         ...state,
@@ -145,6 +152,13 @@ export function systemHealth() {
   return {
     types: [FETCH, FETCH_HEALTH, FETCH_FAIL],
     promise: client => client.get('/management/health')
+  };
+}
+
+export function systemHealthInfo(healthObj) {
+  return {
+    types: [FETCH, FETCH_HEALTH_INFO, FETCH_FAIL],
+    promise: () => Promise.resolve(healthObj)
   };
 }
 
