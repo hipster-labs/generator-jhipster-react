@@ -15,8 +15,8 @@ if (process.env.NODE_ENV !== 'production') {
   // Require async routes only in development for react-hot-reloader to work.
   require('./modules/home/home');
   require('./modules/login/login');
-  require('./modules/account/settings');
-  require('./modules/account/password');
+  // require('./modules/account/settings');
+  // require('./modules/account/password');
   // require('./modules/administration/gateway/gateway');
   require('./modules/administration/logs/logs');
   require('./modules/administration/health/health');
@@ -57,6 +57,7 @@ export default (onLogout) => {
           });
         }}
       />
+      {/*
       <Route
         path="/account/settings"
         getComponent={(nextState, cb) => {
@@ -73,7 +74,6 @@ export default (onLogout) => {
           });
         }}
       />
-      {/*
       <Route
         path="/admin/gateway"
         getComponent={(nextState, cb) => {

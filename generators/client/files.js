@@ -214,6 +214,9 @@ const files = {
         { file: 'modules/administration/configuration/configuration.js', method: 'processJsx' },
         { file: 'modules/administration/docs/docs.js', method: 'processJsx' },
         { file: 'modules/administration/health/health.js', method: 'processJsx' },
+        { file: 'modules/administration/health/health-detail/health-detail.js', method: 'processJsx' },
+        { file: 'modules/administration/health/health-detail/health-modal.js', method: 'processJsx' },
+        { file: 'modules/administration/health/health-detail/index.js', method: 'processJsx' },
         { file: 'modules/administration/logs/logs.js', method: 'processJsx' },
         { file: 'modules/administration/metrics/metrics.js', method: 'processJsx' },
       ]
