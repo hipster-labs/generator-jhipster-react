@@ -7,6 +7,7 @@ const FETCH_LOGS_CHANGE_LEVEL = 'administration/FETCH_LOGS_CHANGE_LEVEL';
 const FETCH_HEALTH = 'administration/FETCH_HEALTH';
 const FETCH_HEALTH_INFO = 'administration/FETCH_HEALTH_INFO';
 const FETCH_METRICS = 'administration/FETCH_METRICS';
+const FETCH_THREAD_DUMP = 'administration/FETCH_THREAD_DUMP';
 const FETCH_USERS = 'administration/FETCH_USERS';
 const FETCH_CONFIGURATIONS = 'administration/FETCH_CONFIGURATIONS';
 const FETCH_ENV = 'administration/FETCH_ENV';
@@ -66,6 +67,12 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         metrics: action.result.data,
+        loading: false
+      };
+    case FETCH_THREAD_DUMP:
+      return {
+        ...state,
+        threadDump: action.result.data,
         loading: false
       };
     case FETCH_LOGS:
@@ -166,6 +173,13 @@ export function systemMetrics() {
   return {
     types: [FETCH, FETCH_METRICS, FETCH_FAIL],
     promise: client => client.get('/management/jhipster/metrics')
+  };
+}
+
+export function systemThreadDump() {
+  return {
+    types: [FETCH, FETCH_THREAD_DUMP, FETCH_FAIL],
+    promise: client => client.get('/management/dump')
   };
 }
 
