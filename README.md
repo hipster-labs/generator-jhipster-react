@@ -1,3 +1,10 @@
+# DEPRECATED
+
+This module is now integrated into `generator-jhipster` repository as React support is now planned in the core generator.
+Work is being done on https://github.com/jhipster/generator-jhipster/tree/jh-react
+
+See [this issue](https://github.com/jhipster/generator-jhipster/issues/6044) for details
+
 # generator-jhipster-react [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > A Jhipster based generator to create awesome react + spring boot applications
 
@@ -5,7 +12,6 @@
 
 ## Installation
 
-**Attention: This is still a work in progress. Use the below steps to use the unreleased development version**
 
 TODO:
 
