@@ -1,0 +1,85 @@
+{
+  "name": "generator-jhipster-react",
+  "version": "0.0.0",
+  "description": "A Jhipster based generator to create react + spring boot application",
+  "homepage": "https://github.com/hipster-labs/generator-jhipster-react",
+  "author": {
+    "name": "Deepu KS",
+    "email": "d4udts@gmail.com",
+    "url": "https://deepu105.github.io"
+  },
+  "contributors": [
+    "Deepu KS <d4udts@gmail.com> (https://deepu105.github.io)",
+    "Sendil Kumar N <sendilkumarn@live.com> (https://sendilkumarn.js.org)",
+    "Yuri <yuri.kushch@gmail.com> (http://ykushch.net)",
+    "gdoslu (https://github.com/gdoslu)"
+  ],
+  "files": [
+    "generators/app",
+    "generators/entity"
+  ],
+  "main": "generators/app/index.js",
+  "keywords": [
+    "yeoman-generator",
+    "jhipster-module" ,
+    "Jhipster-react",
+    "JHipster",
+    "Java",
+    "Spring",
+    "Spring Security",
+    "JPA",
+    "Hibernate",
+    "ReactJS",
+    "Material UI",
+    "Material",
+    "Paper",
+    "React"
+  ],
+  "dependencies": {
+    "chalk": "1.1.3",
+    "lodash": "4.17.4",
+    "mkdirp": "0.5.1",
+    "shelljs": "0.7.7",
+    "semver": "5.3.0",
+    "yeoman-generator": "1.1.1",
+    "generator-jhipster": "latest",
+    "underscore.string": "3.2.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.6.0",
+    "gulp-bump": "^0.1.11",
+    "gulp-git": "^0.5.6",
+    "gulp-istanbul": "^0.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-nsp": "^2.1.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sequence": "^0.3.1",
+    "gulp-shell": "^0.2.11",
+    "eslint": "3.17.1",
+    "eslint-config-airbnb-base": "11.1.1",
+    "eslint-plugin-import": "2.2.0",
+    "fs-extra": "2.1.0",
+    "mocha": "3.2.0",
+    "yeoman-assert": "3.0.0",
+    "yeoman-test": "1.6.0"
+  },
+  "scripts": {
+    "pretest": "eslint .",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
+    "test": "mocha --timeout 20000 --slow 0 --reporter spec"
+  },
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/hipster-labs/generator-jhipster-react.git"
+    },
+  "engines": {
+    "node": ">=6.9.0",
+    "npm": ">=2.14.2"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/hipster-labs/generator-jhipster-react/issues"
+  }
+}
